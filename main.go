@@ -2,14 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+
+	"github.com/AkiGR/go-shortly/handlers"
+	"github.com/AkiGR/go-shortly/storage"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Hello go-shortly")
-	})
+	storage.InitDB()
+
+	http.HandleFunc("/shorten", handlers.ShortenURL)
 
 	fmt.Println("Server is running on :8080")
-	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
