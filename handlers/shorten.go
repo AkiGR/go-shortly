@@ -43,4 +43,3 @@ func generateShortID() string {
 	}
 	return string(shortID)
 }
-
